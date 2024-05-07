@@ -85,7 +85,7 @@ def start_advertising():
     global adv_manager_intf
     
     print("registering adv", adv.get_path())
-    adv_manager_intf.RegisterAdvertisement(adv.get)path(), {}, 
+    adv_manager_intf.RegisterAdvertisement(adv.get_path(), {}, 
                                             reply_handler=register_ad_cb,
                                             error_handler=register_ad_error_cb)
 
@@ -94,7 +94,7 @@ bus = dbus.SystemBus()
 
 adapter_path = '/org/bluez/hci0'
 print(f'using adapter {adapter_path}')
-adv_manager_intf = dbus.Interface(bus.get_object('org.bluez', adapter_path), 'org.bluez.LEAdvertisingManager')
+adv_manager_intf = dbus.Interface(bus.get_object('org.bluez', adapter_path), 'org.bluez.LEAdvertisingManager1')
 
 adv = Advertisement(bus, 0, 'peripheral')
 start_advertising()
